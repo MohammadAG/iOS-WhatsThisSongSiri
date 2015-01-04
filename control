@@ -1,0 +1,9 @@
+Package: com.mohammadag.sirimusictagger
+Name: What's this song, Siri?
+Depends: mobilesubstrate, libactivator, cy+os.ios (>= 8.0)
+Version: 1.0.0
+Architecture: iphoneos-arm
+Description: Invokes Siri's music tagging feature
+Maintainer: Mohammad Abu-Garbeyyeh
+Author: Mohammad Abu-Garbeyyeh
+Section: Tweaks
