@@ -1,6 +1,5 @@
 #import <substrate.h>
 #import <UIKit/UIKit.h>
-#import <libactivator/libactivator.h>
 
 @interface SpringBoard
 - (void)setNextAssistantRecognitionStrings:(id)arg1;
@@ -10,6 +9,15 @@
 + (id)sharedInstance;
 - (void)_activateSiriForPPT;
 @end
+
+@interface SBUIPluginManager
++ (id)sharedInstance;
+- (void)handleButtonUpEventFromSource:(int)source;
+@end
+
+// Keep this import here, otherwise..
+// error: 'LAActivator' may not respond to 'handleButtonUpEventFromSource:' [-Werror]
+#import <libactivator/libactivator.h>
 
 @interface SiriTaggerListener : NSObject <LAListener>
 @end
@@ -26,6 +34,8 @@ static SBAssistantController *assistantController = nil;
     NSArray *myStrings = [NSArray arrayWithObjects:@"What's this song", nil];
     [springBoard setNextAssistantRecognitionStrings:myStrings];
     [assistantController _activateSiriForPPT];
+    // Thanks Ryan!
+    [[%c(SBUIPluginManager) sharedInstance] handleButtonUpEventFromSource:1];
     [event setHandled:YES];
 }
 
